@@ -91,7 +91,7 @@
 
     <script>
         const projects = [
-            { id: 1, name: "Clarifier 1 PDAM Tirtanadi Sunggal", category: "UPRATING", lps: 500, monthly: 1296000, yearly: 15552000, year: "2014" },
+            { id: 1, name: "Clarifier 1 PDAM Tirtanadi Sunggal", category: "UPRATING", lps: 500, monthly: 1296000, yearly: 15552000, year: "2014", image: "Clarifier 1 PDAM Tirtanadi Sunggal.png" },
             { id: 2, name: "Clarifier 6 PDAM Tirtanadi Sunggal", category: "BANGUN BARU", lps: 500, monthly: 1296000, yearly: 15552000, year: "2013" },
             { id: 3, name: "WTP 300 LPS Tirta Asasta Legong", category: "UPRATING", lps: 300, monthly: 777600, yearly: 9331200, year: "2016" },
             { id: 4, name: "WTP 300 LPS Tirta Asasta Citayam", category: "UPRATING", lps: 300, monthly: 777600, yearly: 9331200, year: "2016" },
@@ -110,14 +110,23 @@
                 const badgeColor = p.category === 'ZEROCAPEX' ? 'bg-indigo-600 text-white' : 
                                    p.category === 'UPRATING' ? 'bg-blue-100 text-blue-700' : 'bg-emerald-100 text-emerald-700';
                 
+                // Menangani URL gambar dengan encoding spasi
+                const imgSrc = p.image ? `https://raw.githubusercontent.com/invilawatertreatment-blip/invila-odometer/main/${encodeURIComponent(p.image)}` : null;
+
                 return `
-                <div class="bg-white rounded-lg p-3 card-compact shadow-sm">
+                <div class="bg-white rounded-lg p-3 card-compact shadow-sm flex flex-col">
                     <div class="flex justify-between items-center mb-2">
                         <span class="text-[7px] font-black px-1.5 py-0.5 rounded border border-black/10 ${badgeColor}">${p.category}</span>
                         <span class="text-[8px] font-bold text-slate-400">EST. ${p.year}</span>
                     </div>
-                    <h3 class="font-bold text-slate-900 text-[11px] leading-tight h-7 overflow-hidden mb-2">${p.name}</h3>
-                    <div class="pt-2 border-t border-slate-100 space-y-1">
+                    <h3 class="font-bold text-slate-900 text-[11px] leading-tight mb-2">${p.name}</h3>
+                    
+                    ${imgSrc ? `
+                    <div class="mb-3 border border-slate-100 rounded overflow-hidden bg-slate-50">
+                        <img src="${imgSrc}" alt="${p.name}" class="w-full h-28 object-cover" onerror="this.parentElement.style.display='none'">
+                    </div>` : ''}
+
+                    <div class="pt-2 border-t border-slate-100 space-y-1 mt-auto">
                         <div class="flex justify-between text-[10px] leading-none">
                             <span class="text-slate-400 font-bold">LPS</span>
                             <span class="font-black text-blue-600">${p.lps}</span>
@@ -148,7 +157,6 @@
                 if (id === 'totalLPS') {
                     obj.innerText = current.toFixed(1).replace('.', ',');
                 } else if (id === 'totalYearly') {
-                    // Konversi ke Juta dengan 1 desimal
                     obj.innerText = (current / 1000000).toFixed(1).replace('.', ',');
                 } else {
                     obj.innerText = formatIDN(Math.floor(current));
