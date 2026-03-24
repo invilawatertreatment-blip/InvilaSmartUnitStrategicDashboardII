@@ -3,89 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invila™ - Portfolio Dashboard</title>
+    <title>Invila™ - Strategic Dashboard II</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; }
-        /* Garis box dipertegas hitam sesuai permintaan */
-        .stat-box { border: 3px solid #000; background: #0f172a; }
+        /* Garis box dipertegas hitam industrial */
+        .stat-box { border: 2.5px solid #000; background: #0f172a; }
         .card-industrial { 
             border: 2px solid #000; 
             transition: all 0.2s ease; 
         }
         .card-industrial:hover { 
             border-color: #2563eb;
-            background-color: #fcfcfc;
+            background-color: #f8fafc;
         }
         ::-webkit-scrollbar { display: none; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-900 antialiased">
 
-    <!-- Navigasi Minimalis (Lebih Tipis) -->
-    <nav class="bg-white border-b-2 border-black px-4 py-2 sticky top-0 z-50">
+    <!-- Navigasi (Dibuat sangat tipis) -->
+    <nav class="bg-white border-b-2 border-black px-4 py-1.5 sticky top-0 z-50">
         <div class="max-w-6xl mx-auto flex justify-between items-center">
             <div class="flex items-center gap-2">
-                <div class="w-7 h-7 bg-blue-600 rounded flex items-center justify-center text-white font-black text-sm">I</div>
-                <h1 class="font-bold text-slate-800 text-[10px] tracking-tighter uppercase">Invila™ <span class="text-blue-600">Smart Unit</span></h1>
+                <div class="w-6 h-6 bg-blue-600 rounded flex items-center justify-center text-white font-black text-[10px]">I</div>
+                <h1 class="font-bold text-slate-800 text-[10px] tracking-tighter uppercase">Invila™ <span class="text-blue-600">Smart Unit II</span></h1>
             </div>
-            <div class="flex gap-4 text-[9px] font-black text-slate-500 uppercase tracking-widest">
+            <div class="flex gap-4 text-[8px] font-black text-slate-500 uppercase tracking-widest">
                 <a href="#portfolio" class="hover:text-blue-600 transition-colors">PORTFOLIO</a>
                 <a href="#" class="text-blue-600">CONTACT</a>
             </div>
         </div>
     </nav>
 
-    <main class="max-w-6xl mx-auto px-4 py-4 space-y-6">
+    <main class="max-w-6xl mx-auto px-4 py-3 space-y-4">
         
-        <!-- HEADER REKAM JEJAK (STAT BOX) -->
-        <section class="stat-box rounded-xl p-3 md:p-4 text-white shadow-lg">
+        <!-- STAT BOX KOMPAK (BORDER HITAM) -->
+        <section class="stat-box rounded-xl p-3 text-white shadow-lg">
             <div class="flex flex-col md:flex-row items-center justify-between gap-4">
-                <div class="shrink-0">
-                    <p class="text-[9px] font-black text-blue-400 uppercase tracking-[0.2em] flex items-center gap-2">
-                        <i data-lucide="activity" size="14"></i> REKAM JEJAK STRATEGIS
-                    </p>
+                <div class="shrink-0 flex items-center gap-2 border-r border-slate-700 pr-4 hidden md:flex">
+                    <i data-lucide="pulse" size="14" class="text-blue-400"></i>
+                    <p class="text-[9px] font-black text-white uppercase tracking-[0.2em]">Rekam Jejak</p>
                 </div>
 
-                <div class="flex flex-wrap justify-center md:justify-end gap-6 md:gap-10 w-full">
+                <div class="flex flex-wrap justify-center md:justify-end gap-6 md:gap-12 w-full">
                     <div class="text-center md:text-left">
-                        <p class="text-[8px] font-bold text-slate-500 uppercase mb-0.5">Debit Instan</p>
-                        <p class="text-xl font-black text-white leading-none"><span id="totalLPS">0</span> <span class="text-[9px] font-normal opacity-40">LPS</span></p>
+                        <p class="text-[8px] font-bold text-slate-500 uppercase">Debit Instan</p>
+                        <p class="text-xl font-black text-white leading-none mt-0.5"><span id="totalLPS">0</span> <span class="text-[9px] font-normal opacity-40">LPS</span></p>
                     </div>
-                    <div class="text-center md:text-left border-slate-800 md:border-l md:pl-6">
-                        <p class="text-[8px] font-bold text-slate-500 uppercase mb-0.5">Volume /Bln</p>
-                        <p class="text-xl font-black text-white leading-none"><span id="totalMonthly">0</span> <span class="text-[9px] font-normal opacity-40">m³</span></p>
+                    <div class="text-center md:text-left border-slate-800 md:border-l md:pl-8">
+                        <p class="text-[8px] font-bold text-slate-500 uppercase">Volume /Bln</p>
+                        <p class="text-xl font-black text-white leading-none mt-0.5"><span id="totalMonthly">0</span> <span class="text-[9px] font-normal opacity-40">m³</span></p>
                     </div>
-                    <div class="text-center md:text-left border-slate-800 md:border-l md:pl-6">
-                        <p class="text-[8px] font-bold text-emerald-500 uppercase mb-0.5">Volume /Thn</p>
-                        <p class="text-xl font-black text-emerald-400 leading-none"><span id="totalYearly">0</span> <span class="text-[9px] font-normal opacity-40 uppercase font-bold">Juta m³</span></p>
+                    <div class="text-center md:text-left border-slate-800 md:border-l md:pl-8">
+                        <p class="text-[8px] font-bold text-emerald-500 uppercase">Volume /Thn</p>
+                        <p class="text-xl font-black text-emerald-400 leading-none mt-0.5"><span id="totalYearly">0</span> <span class="text-[9px] font-normal opacity-40 uppercase font-bold">Juta m³</span></p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- GRID PORTOFOLIO -->
-        <section id="portfolio" class="space-y-4">
+        <!-- DETAIL PORTOFOLIO (PADAT) -->
+        <section id="portfolio" class="space-y-3">
             <div class="flex items-center gap-2">
-                <h2 class="text-[10px] font-black text-slate-800 uppercase tracking-[0.3em]">Detail Populasi Proyek</h2>
-                <div class="h-[1.5px] flex-grow bg-slate-300"></div>
-                <button onclick="restartAnimations()" class="text-slate-400 hover:text-blue-600 transition-colors">
-                    <i data-lucide="rotate-cw" size="14"></i>
+                <h2 class="text-[10px] font-black text-slate-800 uppercase tracking-[0.2em]">Detail Populasi Proyek</h2>
+                <div class="h-[1.5px] flex-grow bg-slate-200"></div>
+                <button onclick="restartAnimations()" class="text-slate-300 hover:text-blue-600 transition-colors">
+                    <i data-lucide="rotate-cw" size="12"></i>
                 </button>
             </div>
 
-            <div id="projectGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div id="projectGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                 <!-- JavaScript renders items here -->
             </div>
         </section>
 
     </main>
 
-    <footer class="py-6 border-t border-slate-200 text-center">
-        <p class="text-[9px] font-bold text-slate-500 uppercase tracking-[0.4em] mb-1">ENGINEERING BY INVILA ENGINEERING SYSTEMS</p>
-        <p class="text-[8px] text-slate-400 italic px-6 uppercase tracking-wider">Tidak termasuk Populasi IPAL Puskesmas dan Rumah Sakit</p>
+    <footer class="py-4 border-t border-slate-200 text-center">
+        <p class="text-[8px] font-bold text-slate-500 uppercase tracking-[0.4em] mb-1 leading-tight">ENGINEERING BY INVILA ENGINEERING SYSTEMS</p>
+        <p class="text-[8px] text-slate-400 italic px-6 uppercase tracking-tight">Tidak termasuk Populasi IPAL Puskesmas dan Rumah Sakit</p>
     </footer>
 
     <script>
@@ -109,35 +108,35 @@
                 const badgeColor = p.category === 'ZEROCAPEX' ? 'bg-indigo-600 text-white' : 
                                    p.category === 'UPRATING' ? 'bg-blue-100 text-blue-700' : 'bg-emerald-100 text-emerald-700';
                 
-                // Link gambar menggunakan encoding URL dan mengarah ke repo Proyek-Invila
-                const imgSrc = p.image ? `https://raw.githubusercontent.com/invilawatertreatment-blip/Proyek-Invila/main/${encodeURIComponent(p.image)}` : null;
+                // URL repositori baru: Invila-Smart-Unit-Strategic-Dashboard-II-
+                const imgSrc = p.image ? `https://invilawatertreatment-blip.github.io/Invila-Smart-Unit-Strategic-Dashboard-II-/${encodeURIComponent(p.image)}` : null;
 
                 return `
-                <div class="bg-white rounded-xl p-4 card-industrial shadow-sm flex flex-col h-full">
-                    <div class="flex justify-between items-center mb-2">
-                        <span class="text-[7px] font-black px-2 py-0.5 rounded border border-black/10 ${badgeColor}">${p.category}</span>
-                        <span class="text-[9px] font-bold text-slate-400">EST. ${p.year}</span>
+                <div class="bg-white rounded-lg p-2.5 card-industrial shadow-sm flex flex-col h-full">
+                    <div class="flex justify-between items-center mb-1.5">
+                        <span class="text-[7px] font-black px-1.5 py-0.5 rounded border border-black/10 ${badgeColor}">${p.category}</span>
+                        <span class="text-[8px] font-bold text-slate-400 uppercase">EST. ${p.year}</span>
                     </div>
-                    <h3 class="font-bold text-slate-900 text-[12px] leading-tight mb-3">${p.name}</h3>
+                    <h3 class="font-bold text-slate-900 text-[11px] leading-tight mb-2 h-7 overflow-hidden">${p.name}</h3>
                     
                     ${imgSrc ? `
-                    <div class="mb-4 border border-slate-200 rounded overflow-hidden bg-slate-100 min-h-[120px]">
-                        <img src="${imgSrc}" alt="${p.name}" class="w-full h-32 object-cover" 
-                             onerror="this.onerror=null; this.src='https://placehold.co/400x200/e2e8f0/64748b?text=Image+Not+Found';">
+                    <div class="mb-2 border border-slate-200 rounded overflow-hidden bg-slate-100">
+                        <img src="${imgSrc}" alt="${p.name}" class="w-full h-24 object-cover" 
+                             onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'text-[9px] p-4 text-center text-slate-400\'>Image loading...</div>';">
                     </div>` : ''}
 
-                    <div class="pt-3 border-t border-slate-100 space-y-1 mt-auto">
+                    <div class="pt-2 border-t border-slate-100 space-y-0.5 mt-auto">
                         <div class="flex justify-between items-center text-[10px]">
-                            <span class="text-slate-400 font-bold uppercase tracking-tighter">Debit Instan (LPS)</span>
-                            <span class="font-black text-blue-600 text-sm">${p.lps}</span>
+                            <span class="text-slate-400 font-bold uppercase text-[8px] tracking-tighter">Debit (LPS)</span>
+                            <span class="font-black text-blue-600">${p.lps}</span>
                         </div>
                         <div class="flex justify-between items-center text-[10px]">
-                            <span class="text-slate-400 font-medium tracking-tighter">Bulanan (m³)</span>
-                            <span class="font-bold text-slate-900">${formatIDN(p.monthly)}</span>
+                            <span class="text-slate-400 font-medium text-[8px] tracking-tighter">Bulanan (m³)</span>
+                            <span class="font-bold text-slate-900 text-[10px]">${formatIDN(p.monthly)}</span>
                         </div>
                         <div class="flex justify-between items-center text-[10px]">
-                            <span class="text-slate-400 font-medium tracking-tighter">Tahunan (m³)</span>
-                            <span class="text-slate-500">${formatIDN(p.yearly)}</span>
+                            <span class="text-slate-400 font-medium text-[8px] tracking-tighter">Tahunan (m³)</span>
+                            <span class="text-slate-500 text-[10px]">${formatIDN(p.yearly)}</span>
                         </div>
                     </div>
                 </div>
@@ -169,9 +168,9 @@
         }
 
         function restartAnimations() {
-            animateValue("totalLPS", 2512.3, 1200);
-            animateValue("totalMonthly", 6511992, 1200);
-            animateValue("totalYearly", 78143904, 1500);
+            animateValue("totalLPS", 2512.3, 1000);
+            animateValue("totalMonthly", 6511992, 1000);
+            animateValue("totalYearly", 78143904, 1200);
         }
 
         window.onload = () => { renderProjects(); restartAnimations(); };
