@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invila™ Smart Unit - Strategic Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        .active-tab { background-color: #2563eb !important; color: white !important; }
+        #chat-window { transform: translateY(100%); transition: transform 0.3s ease-in-out; }
+        #chat-window.open { transform: translateY(0); }
+        .chat-bubble-ai { background: #f1f5f9; border-radius: 12px 12px 12px 0; color: #1e293b; }
+        .chat-bubble-user { background: #2563eb; border-radius: 12px 12px 0 12px; color: white; align-self: flex-end; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900">
+
+    <nav class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-slate-200 px-4 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white font-black text-xl shadow-lg">I</div>
+                <div>
+                    <h1 class="font-bold text-slate-800 leading-tight">Invila™ Smart Unit</h1>
+                    <p class="text-[10px] text-slate-500 uppercase tracking-widest font-bold">Strategic Dashboard</p>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto p-4 md:p-8 space-y-16">
+        
+        <section id="populasi" class="space-y-10">
+            <div class="bg-slate-900 rounded-[2.5rem] p-8 md:p-12 text-white relative overflow-hidden shadow-2xl">
+                <div class="relative z-10 space-y-12">
+                    <div class="flex flex-col md:flex-row justify-between items-center gap-6 border-b border-slate-800 pb-8">
+                        <div class="flex items-center gap-6">
+                            <div class="p-4 bg-blue-600 rounded-2xl shadow-lg"><i data-lucide="waves" size="32"></i></div>
+                            <div>
+                                <h2 class="text-xl font-bold tracking-widest uppercase opacity-80">Sub-Total Akumulasi Rekam Jejak</h2>
+                                <p class="text-blue-300 text-sm opacity-60">Total kapasitas terpasang dari seluruh kategori proyek</p>
+                            </div>
+                        </div>
+                        <button onclick="restartAnimations()" class="flex items-center gap-2 bg-slate-800 px-6 py-3 rounded-xl border border-slate-700 hover:bg-slate-700 transition-all active:scale-95">
+                            <i data-lucide="refresh-cw" size="18"></i> Mulai Ulang Animasi
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
+                        <div>
+                            <p class="text-blue-400 font-bold text-xs uppercase tracking-widest mb-2">Total LPS (Debit)</p>
+                            <div class="flex items-baseline justify-center md:justify-start gap-2">
+                                <span id="totalLPS" class="text-5xl font-black tabular-nums">0</span>
+                                <span class="text-xl opacity-40">LPS</span>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-blue-400 font-bold text-xs uppercase tracking-widest mb-2">Total Volume Bulanan</p>
+                            <div class="flex items-baseline justify-center md:justify-start gap-2">
+                                <span id="totalMonthly" class="text-5xl font-black tabular-nums">0</span>
+                                <span class="text-xl opacity-40">m³</span>
+                            </div>
+                        </div>
+                        <div class="bg-blue-600/20 p-6 rounded-3xl border border-blue-500/30">
+                            <p class="text-emerald-400 font-bold text-xs uppercase tracking-widest mb-2">Total Volume Tahunan</p>
+                            <div class="flex items-baseline justify-center md:justify-start gap-2">
+                                <span id="totalYearly" class="text-5xl font-black tabular-nums text-emerald-400">0</span>
+                                <span class="text-xl text-emerald-400 opacity-60">m³</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <h2 class="text-2xl font-black text-slate-800">Detail Populasi Proyek</h2>
+                <div class="h-px flex-grow bg-slate-200"></div>
+            </div>
+
+            <div id="projectGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+    </main>
+
+    <script>
+        // DATA SESUAI TABEL FINAL ANDA
+        const projects = [
+            { name: "Clarifier 1 PDAM Tirtanadi Sunggal", category: "UPRATING", monthly: 1296000, lps: 500, yearly: 15552000, year: "2014" },
+            { name: "Clarifier 6 PDAM Tirtanadi Sunggal", category: "UPRATING", monthly: 1296000, lps: 500, yearly: 15552000, year: "2013" },
+            { name: "WTP 300 LPS Tirta Asasta Legong", category: "UPRATING", monthly: 777600, lps: 300, yearly: 9331200, year: "2016" },
+            { name: "WTP 300 LPS Tirta Asasta Citayam", category: "UPRATING", monthly: 777600, lps: 300, yearly: 9331200, year: "2016" },
+            { name: "SPAM Gunung Sari - Petro Kimia Gresik", category: "BANGUN BARU", monthly: 2160000, lps: 833.3, yearly: 25920000, year: "2016" },
+            { name: "SPAM I Kawasan Industri Wijayakusuma", category: "BANGUN BARU", monthly: 129600, lps: 50, yearly: 1555200, year: "2018" },
+            { name: "IPAL – IPA Kievit Indonesia Salatiga Plant", category: "BANGUN BARU", monthly: 7800, lps: 3, yearly: 93600, year: "2025" },
+            { name: "SPAM United Tractors - Patria Maritim Perkasa", category: "BANGUN BARU", monthly: 2592, lps: 1, yearly: 31104, year: "2025" },
+            { name: "SPAM II Kawasan Industri Wijayakusuma (Modular)", category: "ZEROCAPEX", monthly: 64800, lps: 25, yearly: 777600, year: "2026" }
+        ];
+
+        function formatIDN(num) { 
+            return num.toLocaleString('id-ID');
+        }
+
+        function renderProjects() {
+            const grid = document.getElementById('projectGrid');
+            grid.innerHTML = projects.map((p, index) => `
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 hover:shadow-xl transition-all group">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="text-[10px] font-black px-3 py-1 rounded-full ${
+                            p.category === 'ZEROCAPEX' ? 'bg-indigo-600 text-white shadow-md' : 
+                            p.category === 'UPRATING' ? 'bg-blue-100 text-blue-600' : 'bg-emerald-100 text-emerald-600'
+                        }">${p.category}</span>
+                        <span class="text-slate-400 text-[10px] font-bold uppercase">Est. ${p.year}</span>
+                    </div>
+                    <h3 class="font-bold text-slate-800 mb-6 h-12 leading-tight">${p.name}</h3>
+                    <div class="space-y-3 pt-4 border-t border-slate-50">
+                        <div class="flex justify-between items-end">
+                            <span class="text-[10px] font-bold text-slate-400 uppercase">LPS</span>
+                            <span class="font-black text-blue-600">${p.lps}</span>
+                        </div>
+                        <div class="flex justify-between items-end">
+                            <span class="text-[10px] font-bold text-slate-400 uppercase">m³/Bulan</span>
+                            <span class="font-black text-slate-700">${formatIDN(p.monthly)}</span>
+                        </div>
+                        <div class="flex justify-between items-end">
+                            <span class="text-[10px] font-bold text-slate-400 uppercase">m³/Tahun</span>
+                            <span class="font-bold text-slate-500">${formatIDN(p.yearly)}</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function animateValue(id, end, duration) {
+            const obj = document.getElementById(id);
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const current = progress * end;
+                obj.innerText = id === 'totalLPS' ? current.toFixed(1).replace('.',',') : formatIDN(Math.floor(current));
+                if (progress < 1) window.requestAnimationFrame(step);
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        function restartAnimations() {
+            animateValue("totalLPS", 2512.3, 2000);
+            animateValue("totalMonthly", 6511992, 2000);
+            animateValue("totalYearly", 78143904, 2500);
+        }
+
+        window.onload = () => {
+            renderProjects();
+            restartAnimations();
+            lucide.createIcons();
+        };
+    </script>
+</body>
+</html>
